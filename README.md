@@ -1,4 +1,4 @@
-# SEALSWeather
+# SEALS Weather
 
 This is my training project.
 A simple weather forecast app for Android. Contains a lot of bugs and crashes, but generally works... stable.
