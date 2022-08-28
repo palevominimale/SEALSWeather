@@ -5,7 +5,7 @@ A simple weather forecast app for Android. Contains a lot of bugs and crashes, b
 
 Planned (in order of decreasing relevance):
 - improve widget update algorithm (now it is updating each 30 minutes)
-- stable background updating
+- stable background updating (done)
 - weather alerts
 - improve location detection functionality
 - ability to choose a city
