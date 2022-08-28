@@ -11,10 +11,10 @@
         android:id="@+id/tempWidget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="-5dp"
         android:layout_marginTop="6dp"
+        android:layout_toEndOf="@+id/widgetRefresh"
         android:clickable="true"
         android:text="@string/temp"
         android:textColor="@color/white"
@@ -55,7 +55,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignBottom="@+id/tempWidget"
-        android:layout_marginStart="6dp"
+        android:layout_marginStart="2dp"
         android:layout_marginBottom="0dp"
         android:layout_toEndOf="@+id/tempWidget"
         android:clickable="true"
@@ -69,7 +69,7 @@
         android:layout_alignTop="@+id/widgetWeatherIcon"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="1dp"
-        android:layout_marginEnd="17dp"
+        android:layout_marginEnd="10dp"
         android:contentDescription="Wind speed"
         app:srcCompat="@drawable/wi_wind_beaufort_1"
         tools:ignore="HardcodedText,ImageContrastCheck"
@@ -110,9 +110,9 @@
         android:layout_below="@+id/tempWidget"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="6dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="6dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -120,64 +120,64 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/wi_cloud_refresh"
-            android:contentDescription="@string/weather_state" />
+            android:contentDescription="@string/weather_state"
+            app:srcCompat="@drawable/wi_cloud_refresh" />
 
         <ImageView
             android:id="@+id/wlIcon1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/wi_cloud_refresh"
-            android:contentDescription="@string/weather_state" />
+            android:contentDescription="@string/weather_state"
+            app:srcCompat="@drawable/wi_cloud_refresh" />
 
         <ImageView
             android:id="@+id/wlIcon2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/wi_cloud_refresh"
-            android:contentDescription="@string/weather_state" />
+            android:contentDescription="@string/weather_state"
+            app:srcCompat="@drawable/wi_cloud_refresh" />
 
         <ImageView
             android:id="@+id/wlIcon3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/wi_cloud_refresh"
-            android:contentDescription="@string/weather_state" />
+            android:contentDescription="@string/weather_state"
+            app:srcCompat="@drawable/wi_cloud_refresh" />
 
         <ImageView
             android:id="@+id/wlIcon4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/wi_cloud_refresh"
-            android:contentDescription="@string/weather_state" />
+            android:contentDescription="@string/weather_state"
+            app:srcCompat="@drawable/wi_cloud_refresh" />
 
         <ImageView
             android:id="@+id/wlIcon5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/wi_cloud_refresh"
-            android:contentDescription="@string/weather_state" />
+            android:contentDescription="@string/weather_state"
+            app:srcCompat="@drawable/wi_cloud_refresh" />
 
         <ImageView
             android:id="@+id/wlIcon6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/wi_cloud_refresh"
-            android:contentDescription="@string/weather_state" />
+            android:contentDescription="@string/weather_state"
+            app:srcCompat="@drawable/wi_cloud_refresh" />
 
         <ImageView
             android:id="@+id/wlIcon7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            app:srcCompat="@drawable/wi_cloud_refresh"
-            android:contentDescription="@string/weather_state" />
+            android:contentDescription="@string/weather_state"
+            app:srcCompat="@drawable/wi_cloud_refresh" />
     </LinearLayout>
 
     <LinearLayout
@@ -187,9 +187,9 @@
         android:layout_below="@+id/list"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="6dp"
         android:layout_marginTop="-3dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="6dp"
         android:orientation="horizontal">
 
         <TextView
@@ -272,5 +272,15 @@
             android:textColor="@color/white"
             android:textSize="11sp" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/widgetRefresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="7dp"
+        android:contentDescription="refresh"
+        app:srcCompat="@drawable/wi_refresh"
+        tools:ignore="HardcodedText" />
 
 </RelativeLayout>

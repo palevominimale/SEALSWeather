@@ -73,6 +73,7 @@ class WeatherWidget : AppWidgetProvider() {
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids)
         val pi = PendingIntent.getBroadcast(context, appWidgetId, intent, PendingIntent.FLAG_IMMUTABLE)
         views.setOnClickPendingIntent(R.id.tempWidget, pi)
+        views.setOnClickPendingIntent(R.id.widgetRefresh, pi)
 
         (fR.getById(now) ?: empty).run {
             val bmpOriginal: Bitmap = BitmapFactory.decodeResource(context.applicationContext.resources, R.drawable.winddir)
@@ -82,10 +83,11 @@ class WeatherWidget : AppWidgetProvider() {
             tempCanvas.drawBitmap(bmpOriginal, 0F, 0F, null)
             views.setTextViewText(R.id.humidityWidget, "RH: ${(humidity ?: 0.0F).toInt()}%")
             views.setTextViewText(R.id.pressureWidget, "$pressure hPa")
-            views.setTextViewText(R.id.tempWidget, "$temp°C")
+            views.setTextViewText(R.id.tempWidget, "${temp?.toInt()}°C")
             views.setTextViewText(R.id.widgetWeatherType, "$weatherDescription")
             views.setImageViewResource(R.id.widgetWeatherIcon, weatherIcon ?: defaultIcon)
             views.setImageViewResource(R.id.widgetWindSpd, windIcon ?: defaultIcon)
+            views.setImageViewResource(R.id.widgetRefresh, R.drawable.wi_refresh)
 
             views.setImageViewBitmap(R.id.widgetWindDir, bmpResult)
         }
