@@ -14,4 +14,4 @@ Planned (in order of decreasing relevance):
 Free bonus: it doesn't contain any backdoors (I just don't know how to use them)
 
 <img src="https://github.com/palevominimale/SEALSWeather/blob/master/Screenshot_2022-08-28-12-25-03-447_my.weather.jpg" width=300>
-<img src="https://github.com/palevominimale/SEALSWeather/blob/master/Screenshot_2022-08-28-12-25-03-447_my.weather.jpg" width=300>
+<img src="https://github.com/palevominimale/SEALSWeather/blob/master/Screenshot_2022-08-28-12-25-05-577_my.weather.jpg" width=300>
