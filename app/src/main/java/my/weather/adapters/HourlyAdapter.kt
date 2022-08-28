@@ -36,15 +36,15 @@ class HourlyAdapter(private val forecasts: MutableList<ForecastItem>) :
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         forecasts[position].run {
-            val date = Instant.ofEpochSecond(time).atZone(ZoneId.systemDefault())
-            holder.recyclerviewHumidity.text = "RH: " + humidity.toString() + "%"
-            holder.recyclerviewTemp.text = temp.toString() + "°C"
-            holder.recyclerviewWindDirection.rotation = windIconRotation!!
-            holder.recyclerviewWindIntensity.setImageResource(windIcon!!)
+            val date = Instant.ofEpochSecond(time ?: 0L).atZone(ZoneId.systemDefault())
+            holder.recyclerviewHumidity.text = "RH: " + (humidity ?: 0.0F).toString() + "%"
+            holder.recyclerviewTemp.text = (temp ?: 0.0F).toString() + "°C"
+            holder.recyclerviewWindDirection.rotation = windIconRotation ?: 0.0F
+            holder.recyclerviewWindIntensity.setImageResource(windIcon ?: R.drawable.wi_meteor)
             holder.recyclerviewHour.text = date.toString().subSequence(11,13)
             holder.recyclerviewMinute.text = date.toString().subSequence(14,16)
-            holder.recyclerviewPressure.text = pressure.toString() + " hPa"
-            holder.recyclerviewWeatherIcon.setImageResource(weatherIcon!!)
+            holder.recyclerviewPressure.text = (pressure?: 0.0F).toString() + " hPa"
+            holder.recyclerviewWeatherIcon.setImageResource(weatherIcon ?: R.drawable.wi_wind_beaufort_1)
             holder.recyclerviewDayOfWeek.text = date.dayOfWeek.toString().subSequence(0,3)
         }
     }

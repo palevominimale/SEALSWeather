@@ -3,7 +3,6 @@ package my.weather.network
 import android.content.Context
 import android.location.Location
 import android.util.Log
-import kotlinx.coroutines.runBlocking
 import my.weather.R
 import my.weather.data.ForecastItem
 import my.weather.data.ForecastRepository
@@ -86,12 +85,8 @@ class NetworkOperations(val context: Context, private val fr: ForecastRepository
                 val windIcon = selectWindIcon(windSpd)
                 val weatherDescription = selectWeatherType(weatherCode)
 
-                fr.insertItem(
-                    ForecastItem(
-                        i, time, temp, tempMin, tempMax, humidity, pressure, sunset, sunrise,
-                        weatherDescription, windIcon, windIconRotation, weatherIcon
-                    )
-                )
+                fr.insertItem(ForecastItem(i, time, temp, tempMin, tempMax, humidity, pressure,
+                    sunset, sunrise, weatherDescription, windIcon, windIconRotation, weatherIcon))
             }
         } catch (e: JSONException) {
             Log.println(Log.DEBUG,"JSON", e.toString())

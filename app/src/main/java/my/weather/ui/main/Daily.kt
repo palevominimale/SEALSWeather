@@ -63,7 +63,7 @@ class Daily : Fragment() {
     override fun onResume() {
         super.onResume()
         Log.println(Log.DEBUG, "RESUMED (Daily)", Instant.now().toString())
-//        loadRecyclerToView()
+        loadRecyclerToView()
     }
 
 
@@ -105,10 +105,11 @@ class Daily : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun loadRecyclerToView() {
-        if(fR.getAll().isNotEmpty()) {
+        val check = fR.getById(0)?.time ?: 0L
+        if(check != 0L) {
             dailyForecast.clear()
             for (i in HOUR_OF_INTEREST..FORECAST_DEPTH.toInt() step 24) {
-                dailyForecast.add(fR.getById(i))
+                dailyForecast.add(fR.getById(i) ?: ForecastItem())
             }
             binding.dailyRecycler.adapter?.notifyDataSetChanged()
         }

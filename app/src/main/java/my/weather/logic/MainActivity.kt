@@ -1,13 +1,8 @@
 package my.weather.logic
 
 import android.Manifest
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.viewpager.widget.ViewPager
@@ -72,8 +67,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupWorkRequest() {
-        val wR = PeriodicWorkRequest.Builder(RefreshData::class.java, 15, TimeUnit.MINUTES).setInitialDelay(20, TimeUnit.SECONDS).build()
-        WorkManager.getInstance(applicationContext).enqueue(wR)
-    }
 }

@@ -35,9 +35,4 @@ class IntentHelpers(val context: Context) {
         PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE).send()
 //        Log.println(Log.DEBUG, "IM", "New data available! $intent")
     }
-    fun widgetRefresh() {
-        val intent = Intent(APPWIDGET_UPDATE)
-        PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE).send()
-//        Log.println(Log.DEBUG, "IM", "New data available! $intent")
-    }
 }

@@ -18,6 +18,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import my.weather.R
 import my.weather.adapters.HourlyAdapter
 import my.weather.data.ForecastItem
 import my.weather.data.ForecastRepository
@@ -83,9 +84,9 @@ class Current : Fragment() {
 
     override fun onResume() {
         super.onResume()
-//        loadWeatherToView()
+        loadWeatherToView()
         Log.println(Log.DEBUG, "RESUMED (Current)", Instant.now().toString())
-//        loadRecyclerToView()
+        loadRecyclerToView()
     }
 
     override fun onDestroy() {
@@ -156,33 +157,34 @@ class Current : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     private fun loadRecyclerToView() {
-        if(fR.getAll().isNotEmpty()) {
+        val check = fR.getById(0)?.time ?: 0L
+        if(check != 0L) {
             hourlyForecast.clear()
             val now = LocalTime.now().hour
             for (i in now..now + 48) {
-                hourlyForecast.add(fR.getById(i))
+                hourlyForecast.add(fR.getById(i) ?: ForecastItem())
             }
         }
     }
 
     @SuppressLint("SetTextI18n")
     private fun loadWeatherToView() {
-        val weather = fR.getById(LocalDateTime.now().hour)
+        val weather = fR.getById(LocalDateTime.now().hour) ?: ForecastItem()
         weather.run {
             val format = DateTimeFormatter.ofPattern("HH:mm")
-            binding.temp.text = temp.toString() + "°C"
-            binding.tempMax.text = tempMax.toString() + "°C"
-            binding.tempMin.text = tempMin.toString() + "°C"
-            binding.pressure.text = pressure.toString() + " hPa"
-            binding.humidity.text = "RH: " + humidity.toString() +"%"
-            binding.sunrise.text = Instant.ofEpochSecond(sunrise!!)
+            binding.temp.text = (temp ?: 0.0F).toString() + "°C"
+            binding.tempMax.text = (tempMax ?: 0.0F).toString() + "°C"
+            binding.tempMin.text = (tempMin ?: 0.0F).toString() + "°C"
+            binding.pressure.text = (pressure ?: 0.0F).toString() + " hPa"
+            binding.humidity.text = "RH: " + (humidity ?: 0.0F).toString() +"%"
+            binding.sunrise.text = Instant.ofEpochSecond(sunrise ?: 0L)
                 .atZone(ZoneId.systemDefault()).format(format)
-            binding.sunset.text = Instant.ofEpochSecond(sunset!!)
+            binding.sunset.text = Instant.ofEpochSecond(sunset ?: 0L)
                 .atZone(ZoneId.systemDefault()).format(format)
             binding.weatherType.text = weatherDescription
-            binding.windCurrentDirection.rotation = windIconRotation!!
-            binding.imageWeatherType.setImageResource(weatherIcon!!)
-            binding.windCurrentIntensity.setImageResource(windIcon!!)
+            binding.windCurrentDirection.rotation = windIconRotation ?: 0.0F
+            binding.imageWeatherType.setImageResource(weatherIcon ?: R.drawable.wi_meteor)
+            binding.windCurrentIntensity.setImageResource(windIcon ?: R.drawable.wi_wind_beaufort_1)
             binding.location.text = network.lon.toString() + " " + network.lat.toString()
         }
     }

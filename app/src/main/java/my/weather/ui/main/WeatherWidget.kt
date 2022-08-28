@@ -12,6 +12,7 @@ import android.graphics.Canvas
 import android.util.Log
 import android.widget.RemoteViews
 import my.weather.R
+import my.weather.data.ForecastItem
 import my.weather.data.ForecastRepository
 import my.weather.interaction.IntentHelpers
 import my.weather.logic.APPWIDGET_UPDATE
@@ -75,8 +76,8 @@ class WeatherWidget : AppWidgetProvider() {
         intent.action = SELF_REFRESH
         val pi = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         views.setOnClickPendingIntent(R.id.tempWidget, pi)
-        fR.getById(now).run {
-            views.setTextViewText(R.id.humidityWidget, "RH: ${humidity?.toInt()}%")
+        (fR.getById(now) ?: ForecastItem()).run {
+            views.setTextViewText(R.id.humidityWidget, "RH: ${(humidity ?: 0.0F).toInt()}%")
             views.setTextViewText(R.id.pressureWidget, "$pressure hPa")
             views.setTextViewText(R.id.tempWidget, "$temp°C")
             views.setTextViewText(R.id.widgetWeatherType, "$weatherDescription")
@@ -89,35 +90,35 @@ class WeatherWidget : AppWidgetProvider() {
             tempCanvas.drawBitmap(bmpOriginal, 0F, 0F, null)
             views.setImageViewBitmap(R.id.widgetWindDir, bmpResult)
         }
-        fR.getById(now+1).run {
+        (fR.getById(now+1) ?: ForecastItem()).run {
             views.setTextViewText(R.id.wlTemp, "${temp?.toInt()}°C")
             views.setImageViewResource(R.id.wlIcon, weatherIcon ?: R.drawable.wi_meteor)
         }
-        fR.getById(now+2).run {
+        (fR.getById(now+2) ?: ForecastItem()).run {
             views.setTextViewText(R.id.wlTemp1, "${temp?.toInt()}°C")
             views.setImageViewResource(R.id.wlIcon1, weatherIcon ?: R.drawable.wi_meteor)
         }
-        fR.getById(now+3).run {
+        (fR.getById(now+3) ?: ForecastItem()).run {
             views.setTextViewText(R.id.wlTemp2, "${temp?.toInt()}°C")
             views.setImageViewResource(R.id.wlIcon2, weatherIcon ?: R.drawable.wi_meteor)
         }
-        fR.getById(now+4).run {
+        (fR.getById(now+4) ?: ForecastItem()).run {
             views.setTextViewText(R.id.wlTemp3, "${temp?.toInt()}°C")
             views.setImageViewResource(R.id.wlIcon3, weatherIcon ?: R.drawable.wi_meteor)
         }
-        fR.getById(now+5).run {
+        (fR.getById(now+5) ?: ForecastItem()).run {
             views.setTextViewText(R.id.wlTemp4, "${temp?.toInt()}°C")
             views.setImageViewResource(R.id.wlIcon4, weatherIcon ?: R.drawable.wi_meteor)
         }
-        fR.getById(now+6).run {
+        (fR.getById(now+6) ?: ForecastItem()).run {
             views.setTextViewText(R.id.wlTemp5, "${temp?.toInt()}°C")
             views.setImageViewResource(R.id.wlIcon5, weatherIcon ?: R.drawable.wi_meteor)
         }
-        fR.getById(now+7).run {
+        (fR.getById(now+7) ?: ForecastItem()).run {
             views.setTextViewText(R.id.wlTemp6, "${temp?.toInt()}°C")
             views.setImageViewResource(R.id.wlIcon6, weatherIcon ?: R.drawable.wi_meteor)
         }
-        fR.getById(now+8).run {
+        (fR.getById(now+8) ?: ForecastItem()).run {
             views.setTextViewText(R.id.wlTemp7, "${temp?.toInt()}°C")
             views.setImageViewResource(R.id.wlIcon7, weatherIcon ?: R.drawable.wi_meteor)
         }
