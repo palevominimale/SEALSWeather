@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -32,6 +33,7 @@ import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 class Current : Fragment() {
@@ -42,6 +44,7 @@ class Current : Fragment() {
     private lateinit var fLC: FusedLocationProviderClient
     private lateinit var fR: ForecastRepository
     private lateinit var iH: IntentHelpers
+
     @SuppressLint("VisibleForTests", "MissingPermission", "NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,11 +62,8 @@ class Current : Fragment() {
             network.checkDB()
         }.invokeOnCompletion {
             requireActivity().runOnUiThread {
-                loadRecyclerToView()
                 loadWeatherToView()
-                requireActivity().runOnUiThread {
-                    binding.hourlyRecycler.adapter?.notifyDataSetChanged()
-                }
+                loadRecyclerToView()
             }
         }
         binding.swipeRefreshCurrent.setOnRefreshListener {
@@ -165,12 +165,17 @@ class Current : Fragment() {
                 hourlyForecast.add(fR.getById(i) ?: ForecastItem())
             }
         }
+        requireActivity().runOnUiThread {
+            binding.hourlyRecycler.adapter?.notifyDataSetChanged()
+        }
     }
 
     @SuppressLint("SetTextI18n")
     private fun loadWeatherToView() {
         val weather = fR.getById(LocalDateTime.now().hour) ?: ForecastItem()
         weather.run {
+            val city = Geocoder(context, Locale.ENGLISH)
+                .getFromLocation(network.lat, network.lon, 1)[0].locality
             val format = DateTimeFormatter.ofPattern("HH:mm")
             binding.temp.text = (temp ?: 0.0F).toString() + "°C"
             binding.tempMax.text = (tempMax ?: 0.0F).toString() + "°C"
@@ -185,7 +190,7 @@ class Current : Fragment() {
             binding.windCurrentDirection.rotation = windIconRotation ?: 0.0F
             binding.imageWeatherType.setImageResource(weatherIcon ?: R.drawable.wi_meteor)
             binding.windCurrentIntensity.setImageResource(windIcon ?: R.drawable.wi_wind_beaufort_1)
-            binding.location.text = network.lon.toString() + " " + network.lat.toString()
+            binding.location.text = city
         }
     }
 }

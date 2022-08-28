@@ -27,6 +27,7 @@ class NetworkOperations(val context: Context, private val fr: ForecastRepository
     fun setLocation(location: Location) {
         lat = location.latitude
         lon = location.longitude
+
     }
 
     fun getOpenMeteoAPIData() {

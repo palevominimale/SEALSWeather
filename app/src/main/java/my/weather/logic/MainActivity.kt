@@ -6,12 +6,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.viewpager.widget.ViewPager
-import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
 import com.google.android.material.tabs.TabLayout
 import my.weather.databinding.ActivityMainBinding
-import my.weather.interaction.RefreshData
-import java.util.concurrent.TimeUnit
 
 const val FORECAST_DEPTH = 168L
 const val HOUR_OF_INTEREST = 15
