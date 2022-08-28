@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ import my.weather.databinding.FragmentDailyBinding
 import my.weather.interaction.IntentHelpers
 import my.weather.logic.*
 import my.weather.network.NetworkOperations
-import java.time.Instant
 
 @Suppress("SENSELESS_COMPARISON")
 class Daily : Fragment() {
@@ -33,7 +31,6 @@ class Daily : Fragment() {
     private lateinit var network: NetworkOperations
     private lateinit var binding: FragmentDailyBinding
 
-    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,7 +50,6 @@ class Daily : Fragment() {
             iH.notifyIsRefreshing()
             loadRecyclerToView()
             iH.requestNewData()
-            binding.dailyRecycler.adapter?.notifyDataSetChanged()
         }
         setupIntentManager()
         iH.notifyReady()
@@ -62,7 +58,6 @@ class Daily : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.println(Log.DEBUG, "RESUMED (Daily)", Instant.now().toString())
         loadRecyclerToView()
     }
 
@@ -79,13 +74,11 @@ class Daily : Fragment() {
                     NEW_DATA_AVAILABLE -> {
                         requireActivity().runOnUiThread {
                             loadRecyclerToView()
-                            Log.println(Log.DEBUG, "IM", "(DAILY) Received: $intent")
                         }
                     }
                     REFRESHING -> {
                         requireActivity().runOnUiThread {
                             binding.swipeRefreshDaily.isEnabled = false
-                            Log.println(Log.DEBUG, "IM", "(DAILY) Swipe blocked!: $intent")
                         }
                     }
                     REFRESHED -> {
@@ -93,14 +86,12 @@ class Daily : Fragment() {
                             loadRecyclerToView()
                             binding.swipeRefreshDaily.isRefreshing = false
                             binding.swipeRefreshDaily.isEnabled = true
-                            Log.println(Log.DEBUG, "IM", "(DAILY) Swipe unblocked!: $intent")
                         }
                     }
                 }
             }
         }
         requireActivity().registerReceiver(receiver, filter)
-        Log.println(Log.DEBUG, "IM", "(DAILY) Registered!")
     }
 
     @SuppressLint("NotifyDataSetChanged")
