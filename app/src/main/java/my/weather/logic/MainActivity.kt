@@ -7,7 +7,6 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.viewpager.widget.ViewPager
@@ -61,13 +60,11 @@ class MainActivity : AppCompatActivity() {
                 when(intent.action) {
                     READY -> {
                         setupWorkRequest()
-                        Log.println(Log.DEBUG, "IM", "(MAIN) Work initialized!")
                     }
                 }
             }
         }
         registerReceiver(receiver, filter)
-        Log.println(Log.DEBUG, "IM", "(MAIN) Registered!")
     }
 
     private fun setupWorkRequest() {

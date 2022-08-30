@@ -136,8 +136,8 @@ class Current : Fragment() {
         if(check != 0L) {
             hourlyForecast.clear()
             val now = LocalTime.now().hour
-            for (i in now..now + 48) {
-                hourlyForecast.add(fR.getById(i) ?: ForecastItem())
+            fR.getByRange(now..now+48).forEach {
+                hourlyForecast.add(it ?: ForecastItem())
             }
         }
         requireActivity().runOnUiThread {

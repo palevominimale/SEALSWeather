@@ -10,9 +10,18 @@ class ForecastRepository(context: Context) {
         return db.findById(id)
     }
 
+    fun getByIds(ids: List<Int>): List<ForecastItem?> {
+        return db.loadAllByIds(ids)
+    }
+
+    fun getByRange(ids: IntRange) : List<ForecastItem?>{
+        return db.loadByRange(ids.toList())
+    }
+
     fun insertItem(item: ForecastItem) {
         db.insertItem(item)
     }
+
 
     fun deleteAll() {
         db.deleteAll()

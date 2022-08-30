@@ -99,8 +99,8 @@ class Daily : Fragment() {
         val check = fR.getById(0)?.time ?: 0L
         if(check != 0L) {
             dailyForecast.clear()
-            for (i in HOUR_OF_INTEREST..FORECAST_DEPTH.toInt() step 24) {
-                dailyForecast.add(fR.getById(i) ?: ForecastItem())
+            fR.getByIds((HOUR_OF_INTEREST..FORECAST_DEPTH.toInt() step 24).toList()).forEach {
+                dailyForecast.add(it ?: ForecastItem())
             }
             binding.dailyRecycler.adapter?.notifyDataSetChanged()
         }

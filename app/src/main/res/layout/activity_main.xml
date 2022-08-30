@@ -9,11 +9,10 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tabIconTint="@color/black"
         app:tabIndicatorColor="@color/white"
@@ -26,6 +25,6 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        app:layout_constraintStart_toStartOf="@+id/tabs"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabs" />
 </androidx.constraintlayout.widget.ConstraintLayout>
